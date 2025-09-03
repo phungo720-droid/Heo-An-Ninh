@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Heo An Ninh - Cày Thuê Liên Minh</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset cơ bản */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(120deg, #001f3f 0%, #005f73 100%);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navbar */
+    header {
+      background-color: #111;
+      padding: 20px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 2.2rem;
+      letter-spacing: 3px;
+      color: #f0c419;
+      cursor: default;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 35px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #f0c419;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: #fff;
+    }
+    nav ul li a.active::after,
+    nav ul li a:hover::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 3px;
+      background: #f0c419;
+      bottom: -6px;
+      left: 0;
+      border-radius: 2px;
+    }
+
+    /* Hero section */
+    .hero {
+      background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Nunu_0.jpg') center center/cover no-repeat;
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      color: #f0c419;
+    }
+
+    .hero-content h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3.8rem;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 6px #000;
+    }
+
+    .hero-content p {
+      font-size: 1.6rem;
+      font-weight: 500;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 5px #000;
+    }
+
+    .hero-content a {
+      display: inline-block;
+      background-color: #f0c419;
+      color: #111;
+      padding: 15px 40px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(240,196,25,0.5);
+    }
+    .hero-content a:hover {
+      background-color: #fff;
+      color: #333;
+      box-shadow: 0 8px 20px rgba(255,255,255,0.8);
+    }
+
+    /* Section chung */
+    section {
+      padding: 70px 15%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    section h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5rem;
+      color: #f0c419;
+      margin-bottom: 25px;
+      text-align: center;
+      text-shadow: 1px 1px 4px #222;
+    }
+
+    /* Giới thiệu */
+    #about {
+      background: linear-gradient(120deg, #13394a 0%, #1f3a48 100%);
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(240,196,25,0.8);
+    }
+    #about p {
+      font-size: 1.3rem;
+      line-height: 1.8;
+      color: #ddd;
+      text-align: justify;
+    }
+
+    /* Dịch vụ */
+    #services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 30px;
+    }
+
+    .service-card {
+      background: #111;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 0 25px rgba(240,196,25,0.6);
+      transition: transform 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 40px #f0c419;
+    }
+
+    .service-card img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      object-fit: cover;
+      aspect-ratio: 16/9;
+    }
+
+    .service-card h4 {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #f0c419;
+      text-align: center;
+    }
+
+    .service-card p {
+      font-size: 1rem;
+      color: #eee;
+      text-align: center;
+    }
+
+    /* Bảng giá */
+    #pricing {
+      background: linear-gradient(120deg, #1f2a3c 0%, #152231 100%);
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(240,196,25,0.8);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      color: #f0c419;
+      font-size: 1.2rem;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(240,196,25,0.6);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    thead {
+      background-color: #222;
+    }
+
+    thead th {
+      padding: 15px;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #111;
+    }
+
+    tbody tr:hover {
+      background-color: #333;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    tbody td {
+      padding: 12px;
+      border-bottom: 1px solid #333;
+    }
+
+    /* Liên hệ */
+    #contact {
+      text-align: center;
+      background: linear-gradient(120deg, #13394a 0%, #1f3a48 100%);
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(240,196,25,0.8);
+      padding-bottom: 40px;
+    }
+
+    #contact p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      color: #eee;
+    }
+
+    #contact a {
+      color: #f0c419;
+      font-weight: 700;
+      font-size: 1.3rem;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: border-bottom 0.3s ease;
+    }
+
+    #contact a:hover {
+      border-bottom: 2px solid #f0c419;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #111;
+      color: #666;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: auto;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      box-shadow: inset 0 4px 10px rgba(0,0,0,0.7);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      section {
+        padding: 40px 10px;
+      }
+      .hero-content h2 {
+        font-size: 2.8rem;
+      }
+      .hero-content p {
+        font-size: 1.2rem;
+      }
+      nav ul {
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Heo An Ninh</h1>
+    <nav>
+      <ul>
+        <li><a href="#home" class="active">Trang Chủ</a></li>
+        <li><a href="#about">Giới Thiệu</a></li>
+        <li><a href="#services">Dịch Vụ</a></li>
+        <li><a href="#pricing">Bảng Giá</a></li>
+        <li><a href="#contact">Liên Hệ</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero" id="home" role="banner" aria-label="Ảnh nền Nunu và Willump">
+    <div class="hero-content">
+      <h2>Cày Thuê Liên Minh - Uy Tín, Nhanh Chóng</h2>
+      <p>Heo An Ninh chuyên cung cấp dịch vụ cày thuê Liên Minh huyền thoại với đội ngũ tay to, giá cực kỳ hợp lý!</p>
+      <a href="#contact" aria-label="Liên hệ qua Facebook">Liên hệ ngay!</a>
+    </div>
+  </section>
+
+  <section id="about" aria-labelledby="about-title">
+    <h3 id="about-title">Giới Thiệu</h3>
+    <p>
+      Heo An Ninh là dịch vụ cày thuê Liên Minh huyền thoại hàng đầu, cam kết chất lượng, nhanh chóng và an toàn. Đội ngũ game thủ kinh nghiệm cao luôn giúp bạn lên rank, farm đồ, và hoàn thành nhiệm vụ trong thời gian ngắn nhất. 
+      Với sự am hiểu sâu sắc về các tướng, bản đồ và meta, chúng tôi đảm bảo mang lại trải nghiệm tuyệt vời nhất cho khách hàng.
+    </p>
+  </section>
+
+  <section id="services" aria-labelledby="services-title">
+    <h3 id="services-title">Dịch Vụ Của Chúng Tôi</h3>
+    <div class="service-card" role="article" aria-label="Dịch vụ cày thuê rank">
+      <img src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Nunu_0.jpg" alt="Hình ảnh tướng Nunu and Willump" />
+      <h4>Cày Thuê Rank</h4>
+      <p>Giúp bạn leo rank nhanh chóng từ Sắt đến Thách Đấu. Cam kết bảo mật tài khoản và uy tín hàng đầu.</p>
+    </div>
+    <div class="service-card" role="article" aria-label="Dịch vụ cày kỷ vật">
+      <img src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Zac_0.jpg" alt="Hình ảnh tướng Zac" />
+      <h4>Cày Kỷ Vật</h4>
+      <p>Hoàn thành nhiệm vụ sự kiện, để bạn nhận phần thưởng hấp dẫn nhanh nhất.</p>
+    </div>
+  </section>
+<section id="pricing" aria-labelledby="pricing-title">
+  <h3 id="pricing-title">Bảng Giá Dịch Vụ Cày Thuê</h3>
+  
+  <div style="text-align: center;">
+    <img 
+      src="https://i.postimg.cc/grxWmhWq/bang-gia-rank.jpg" 
+      alt="Bảng giá cày thuê rank Liên Minh" 
+      style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 0 25px rgba(240,196,25,0.6);" 
+    />
+  </div>
+
+  <br />
+
+  <table role="table" aria-describedby="pricing-description">
+    <thead>
+      <tr>
+        <th>Dịch Vụ</th>
+        <th>Chi Tiết</th>
+        <th>Giá (VNĐ)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Cày Thuê</td>
+        <td>Cao Thủ lên Thách Đấu</td>
+        <td>2,500,000</td>
+      </tr>
+    </tbody>
+<tbody>
+      <tr>
+        <td>Cày Thuê</td>
+        <td>Kim Cương lên Cao Thủ</td>
+        <td>700,000</td>
+      </tr>
+    </tbody>
+<tbody>
+      <tr>
+        <td>Cày Thuê</td>
+        <td>Lục Bảo lên Kim Cương</td>
+        <td>350,000</td>
+      </tr>
+    </tbody>
+<tbody>
+      <tr>
+        <td>Cày Thuê</td>
+        <td>Bạch Kim lên Lục bảo</td>
+        <td>300,000</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<br />
+
+  <table role="table" aria-describedby="pricing-description">
+    <thead>
+      <tr>
+        <th>Dịch Vụ</th>
+        <th>Chi Tiết</th>
+        <th>Giá (VNĐ)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Cày Kỷ Vật</td>
+        <td>Nhiệm vụ sự kiện</td>
+        <td>400,000</td>
+      </tr>
+    </tbody>
+ <tbody>
+      <tr>
+        <td>Duo Rank</td>
+        <td>Kim cương đến Cao Thủ</td>
+        <td>40,000h</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+  <section id="contact" aria-labelledby="contact-title">
+    <h3 id="contact-title">Liên Hệ</h3>
+    <p>Nhấn vào link bên dưới để liên hệ với chúng tôi qua Facebook:</p>
+    <p>
+      <a href="https://www.facebook.com/shop.accHeoAnNinh/" target="_blank" rel="noopener noreferrer" aria-label="Facebook Heo An Ninh">
+        https://www.facebook.com/shop.accHeoAnNinh/
+      </a>
+    </p>
+  </section>
+
+  <footer>
+    <p>© 2025 Heo An Ninh. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Thêm active class cho menu khi cuộn
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll("nav ul li a");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 70;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
